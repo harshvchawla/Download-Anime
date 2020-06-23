@@ -3,3 +3,4 @@
 .local/db/
 .local/nuget.cache
 .local/AllDependencies.json
+.local/ProjectSettings.json
