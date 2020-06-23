@@ -1,0 +1,5 @@
+.local/DownloadAnime.nuget.props
+.local/PackageCache.json
+.local/db/
+.local/nuget.cache
+.local/AllDependencies.json
