@@ -5,7 +5,3 @@
 1.b) the "downloads" window (ctrl+j) to be kept open separately
 
 2) environment: windows OS with 1366x768 resolution (15.6" 16:9)
-
-# open issues
-1) Same file can be downloaded multiple times
-2) when to stop is not coded yet
