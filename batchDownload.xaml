@@ -1,16 +1,15 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="the_hokage_way" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="episodeNum" Type="InArgument(x:Int32)" />
     <x:Property Name="urlPrefix" Type="InArgument(x:String)" />
-    <x:Property Name="animeName" Type="InArgument(x:String)" />
     <x:Property Name="lastEpisodeNum" Type="InArgument(x:Int32)" />
+    <x:Property Name="startEpisodeNum" Type="InArgument(x:Int32)" />
   </x:Members>
-  <this:the_hokage_way.episodeNum>
-    <InArgument x:TypeArguments="x:Int32" />
-  </this:the_hokage_way.episodeNum>
   <this:the_hokage_way.lastEpisodeNum>
     <InArgument x:TypeArguments="x:Int32" />
   </this:the_hokage_way.lastEpisodeNum>
+  <this:the_hokage_way.startEpisodeNum>
+    <InArgument x:TypeArguments="x:Int32" />
+  </this:the_hokage_way.startEpisodeNum>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
@@ -94,14 +93,14 @@
       </sap:WorkflowViewStateService.ViewState>
       <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
-          <OutArgument x:TypeArguments="x:Int32">[episodeNum]</OutArgument>
+          <OutArgument x:TypeArguments="x:Int32">[startEpisodeNum]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="x:Int32">[episodeNum+1]</InArgument>
+          <InArgument x:TypeArguments="x:Int32">[startEpisodeNum+1]</InArgument>
         </Assign.Value>
       </Assign>
       <FlowStep.Next>
-        <FlowDecision x:Name="__ReferenceID4" Condition="[episodeNum &lt;=lastEpisodeNum]" DisplayName="check ep range" sap:VirtualizedContainerService.HintSize="86,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+        <FlowDecision x:Name="__ReferenceID4" Condition="[startEpisodeNum &lt;=lastEpisodeNum]" DisplayName="check ep range" sap:VirtualizedContainerService.HintSize="86,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -127,14 +126,14 @@
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;opening: &quot; + urlPrefix+episodeNum.ToString]" />
-                <ui:OpenBrowser Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" BrowserType="Firefox" DisplayName="firefox browsing stuff" sap:VirtualizedContainerService.HintSize="434,158" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" UiBrowser="[seeYouSoon]" Url="[urlPrefix+episodeNum.ToString]">
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;opening: &quot; + urlPrefix+startEpisodeNum.ToString]" />
+                <ui:OpenBrowser Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" BrowserType="Firefox" DisplayName="firefox browsing stuff" sap:VirtualizedContainerService.HintSize="434,158" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" UiBrowser="[seeYouSoon]" Url="[urlPrefix+startEpisodeNum.ToString]">
                   <ui:OpenBrowser.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                       </ActivityAction.Argument>
-                      <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="NavigateTo_3" Url="[urlPrefix+episodeNum.ToString]" />
+                      <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="NavigateTo_3" Url="[urlPrefix+startEpisodeNum.ToString]" />
                     </ActivityAction>
                   </ui:OpenBrowser.Body>
                   <sap:WorkflowViewStateService.ViewState>
@@ -240,7 +239,7 @@
                   <av:Size x:Key="ShapeSize">200,51</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Fin" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;reached beyond last episode num&quot;]" />
+              <ui:LogMessage DisplayName="Fin" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;reached beyond last episode num&quot;]" />
             </FlowStep>
           </FlowDecision.False>
         </FlowDecision>
